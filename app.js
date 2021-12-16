@@ -21,7 +21,7 @@ const server = app.listen(PORT, () =>
 
 const io = socketio.init(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://150.95.82.125:4200",
     methods: ["GET", "POST"],
   },
 });
