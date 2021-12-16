@@ -22,6 +22,7 @@ const server = app.listen(PORT, () =>
 const io = socketio.init(server, {
   cors: {
     origin: "http://150.95.82.125:4200",
+    // orign: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
@@ -40,10 +41,10 @@ io.on("connection", (socket) => {
   });
   io.emit("users", users);
   console.log(users);
-  socket.on("file:transfer", (reciverId, buffer) => {
+  socket.on("file:transfer", (reciverId, buffer, filename) => {
     console.log(reciverId);
     // const myBuffer = Buffer.from(dataurl, "base64");
-    io.to(reciverId).emit("file:recieve", buffer);
+    io.to(reciverId).emit("file:recieve", { buffer, filename });
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
